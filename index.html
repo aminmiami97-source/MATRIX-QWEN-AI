@@ -21,7 +21,7 @@
 
 .loader-screen{display:none;position:fixed;inset:0;z-index:50;align-items:center;justify-content:center;padding:22px;background:rgba(7,7,12,.96);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px)}
 .loader-screen.visible{display:flex}
-.loader-card{width:min(520px,100%);padding:34px 30px 26px;border:1px solid #383246;border-radius:22px;background:linear-gradient(155deg,#181521,#0e0e15 72%);box-shadow:0 28px 100px #000b,0 0 70px #7859d51c;text-align:center}
+.loader-card{position:relative;width:min(520px,100%);padding:34px 30px 26px;border:1px solid #383246;border-radius:22px;background:linear-gradient(155deg,#181521,#0e0e15 72%);box-shadow:0 28px 100px #000b,0 0 70px #7859d51c;text-align:center}
 .loader-symbol{width:62px;height:62px;margin:0 auto 20px;border:1px solid #5d478d;border-radius:19px;background:linear-gradient(145deg,#302448,#171320);display:grid;place-items:center;box-shadow:0 10px 36px #9471ff24}
 .loader-symbol svg{width:29px;height:29px;color:#c8b7ff}
 .loader-kicker{font-size:10px;font-weight:700;letter-spacing:2.1px;color:#a994e7}
@@ -31,7 +31,7 @@
 .loader-model strong{display:block;font-size:12px;color:#eeeaf8}
 .loader-model span{display:block;margin-top:4px;font-size:10px;color:#898496}
 .loader-size{font:700 13px "Space Grotesk";color:#d3c5ff;white-space:nowrap}
-.loader-track{height:7px;border-radius:20px;overflow:hidden;background:#2a2634}
+.loader-track{height:7px;border-radius:20px;overflow:hidden;background:#2a2634}.loader-track.indeterminate .loader-fill{width:36%!important;animation:loader-slide 1.35s ease-in-out infinite}@keyframes loader-slide{0%{transform:translateX(-120%)}100%{transform:translateX(300%)}}.loader-close{position:absolute;top:13px;right:13px;width:34px;height:34px;display:grid;place-items:center;border:1px solid #393345;border-radius:10px;background:#14121c;color:#aaa4ba}.loader-close:hover{background:#272137;color:#fff;border-color:#7055aa}.loader-close svg{width:16px;height:16px}
 .loader-fill{height:100%;width:0%;border-radius:20px;background:linear-gradient(90deg,#7553df,#b79bff);box-shadow:0 0 18px #a385ff60;transition:width .25s ease}
 .loader-status-row{display:flex;justify-content:space-between;gap:10px;margin-top:10px;color:#c9c4d4;font-size:11px}
 .loader-status-row span:last-child{font-variant-numeric:tabular-nums;color:#b59cff}
@@ -70,13 +70,14 @@
 
 <div class="loader-screen" id="loaderScreen" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="loaderHeading">
   <div class="loader-card">
+    <button class="loader-close" id="closeLoaderBtn" type="button" aria-label="Close model download panel" title="Close panel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
     <div class="loader-symbol"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 7.5 12 3l8 4.5v9L12 21l-8-4.5z"/><path d="m4.5 7.8 7.5 4.3 7.5-4.3M12 12v9"/></svg></div>
     <div class="loader-kicker">MATRIX LOCAL AI</div>
     <h2 class="loader-heading" id="loaderHeading">Preparing Qwen</h2>
     <p class="loader-copy" id="loaderCopy">Your AI model runs directly in this browser. The first load downloads the model; later visits can reuse the browser cache.</p>
     <div class="loader-model"><div><strong>Qwen2.5 · 0.5B Instruct</strong><span>4-bit MLC · WebGPU acceleration</span></div><div class="loader-size">~290 MB</div></div>
-    <div class="loader-track"><div class="loader-fill" id="progressBar"></div></div>
-    <div class="loader-status-row"><span id="progressLabel">Waiting to start</span><span id="percentLabel">0%</span></div>
+    <div class="loader-track indeterminate" id="progressTrack"><div class="loader-fill" id="progressBar"></div></div>
+    <div class="loader-status-row"><span id="progressLabel">Waiting to start</span><span id="percentLabel">Preparing</span></div>
     <p class="loader-detail" id="loaderDetail">Keep this tab open while the model downloads and initializes.</p>
     <div class="loader-error" id="loaderError"></div>
     <div class="loader-actions"><button class="loader-action primary" id="continueBtn" hidden>Continue to chat</button><button class="loader-action primary" id="retryBtn" hidden>Try again</button></div>
@@ -104,11 +105,11 @@ function createChat(){const chat={id:makeId(),title:"New chat",updated:Date.now(
 function closeSidebar(){sidebar.classList.remove("open");overlay.classList.remove("show")}
 function showLoadingScreen(){const screen=$("loaderScreen");screen.classList.add("visible");screen.setAttribute("aria-hidden","false");$("loaderError").style.display="none";$("continueBtn").hidden=true;$("retryBtn").hidden=true}
 function hideLoadingScreen(){const screen=$("loaderScreen");screen.classList.remove("visible");screen.setAttribute("aria-hidden","true")}
-function setLoadingProgress(label,percent,detail){$("progressLabel").textContent=label||"Preparing model…";if(Number.isFinite(percent)){const value=Math.max(0,Math.min(100,percent));$("progressBar").style.width=value+"%";$("percentLabel").textContent=Math.round(value)+"%"}if(detail)$("loaderDetail").textContent=detail}
+function setLoadingProgress(label,percent,detail){$("progressLabel").textContent=label||"Preparing model…";const track=$("progressTrack");if(Number.isFinite(percent)){const value=Math.max(0,Math.min(100,percent));track.classList.remove("indeterminate");$("progressBar").style.transform="none";$("progressBar").style.width=value+"%";$("percentLabel").textContent=Math.round(value)+"%"}else{track.classList.add("indeterminate");$("progressBar").style.width="36%";$("percentLabel").textContent="In progress"}if(detail)$("loaderDetail").textContent=detail}
 function onModelProgress(report){
   if(!report||typeof report!=="object")return;
-  const text=typeof report.text==="string"?report.text:"Loading model files…";
-  const raw=Number(report.progress);
+  const text=typeof report.text==="string"?report.text:(typeof report.status==="string"?report.status:"Downloading model files…");
+  const raw=typeof report.progress==="number"?report.progress:Number.NaN;
   const percent=Number.isFinite(raw)?(raw<=1?raw*100:raw):null;
   setLoadingProgress(text,percent,text);
 }
@@ -119,12 +120,12 @@ function renderMessages(){conversation.replaceChildren();const chat=activeChat()
 function renderAll(){renderList();renderMessages()}
 async function loadModel(){
   if(engine)return engine;
-  if(modelPromise)return modelPromise;
+  if(modelPromise){showLoadingScreen();return modelPromise;}
   showLoadingScreen();
   $("loaderHeading").textContent="Preparing Qwen";
   $("loaderCopy").textContent="Connecting to the browser AI engine and checking WebGPU support.";
-  setLoadingProgress("Preparing browser engine",0,"The first download is approximately 290 MB. Later visits may reuse the browser cache.");
-  $("loadBtn").disabled=true;$("loadBtn").textContent="Loading…";setStatus("Loading model",false);
+  setLoadingProgress("Preparing browser engine",null,"The model package is approximately 290 MB. Closing this panel does not stop the download.");
+  $("loadBtn").disabled=false;$("loadBtn").textContent="Show download";setStatus("Loading model",false);
   modelPromise=(async()=>{
     try{
       if(!("gpu" in navigator))throw new Error("WebGPU is not available in this browser. Please use a recent Chrome or Edge browser on a device with WebGPU support.");
@@ -132,8 +133,8 @@ async function loadModel(){
       if(!adapter)throw new Error("No compatible WebGPU adapter was found. Try a different browser or device.");
       $("loaderHeading").textContent="Loading MATRIX QWEN";
       $("loaderCopy").textContent="Downloading the compact Qwen model and preparing it for local chat. Keep this tab open.";
-      setLoadingProgress("Starting model download",0,"Model: Qwen2.5 0.5B Instruct · MLC 4-bit · approximately 290 MB.");
-      const {CreateMLCEngine,prebuiltAppConfig}=await import("https://esm.run/@mlc-ai/web-llm@0.2.89");
+      setLoadingProgress("Connecting to model files",null,"Model: Qwen2.5 0.5B Instruct · MLC 4-bit · approximately 290 MB.");
+      const {CreateMLCEngine,prebuiltAppConfig}=await import("https://esm.run/@mlc-ai/web-llm@0.2.88");
       // IndexedDB avoids the Cache API path that produced Cache.add() network errors.
       const appConfig={...prebuiltAppConfig,cacheBackend:"indexeddb"};
       let lastError;
@@ -142,7 +143,7 @@ async function loadModel(){
           if(attempt===2){
             $("loaderHeading").textContent="Retrying model download";
             $("loaderCopy").textContent="The first download was interrupted. MATRIX is retrying the model initialization once.";
-            setLoadingProgress("Retrying download",0,"A temporary network interruption may have caused the previous attempt to fail.");
+            setLoadingProgress("Retrying download",null,"A temporary network interruption may have caused the previous attempt to fail.");
             await new Promise(resolve=>setTimeout(resolve,1200));
           }
           engine=await CreateMLCEngine(MODEL_ID,{initProgressCallback:onModelProgress,appConfig});
@@ -173,7 +174,7 @@ async function loadModel(){
       $("loaderError").textContent=rawMessage+networkHint;
       $("loaderError").style.display="block";
       $("retryBtn").hidden=false;
-      setLoadingProgress("Loading failed",0,"Check WebGPU support and your connection, then retry.");
+      setLoadingProgress("Loading failed",null,"Check WebGPU support and your connection, then retry.");
       $("loadBtn").textContent="Try loading again";$("loadBtn").disabled=false;
       setStatus("Load failed",false);
       throw error;
@@ -208,6 +209,7 @@ function resizeInput(){input.style.height="auto";input.style.height=Math.min(inp
 $("newChat").addEventListener("click",createChat);
 $("loadBtn").addEventListener("click",()=>loadModel().catch(()=>{}));
 $("continueBtn").addEventListener("click",hideLoadingScreen);
+$("closeLoaderBtn").addEventListener("click",hideLoadingScreen);
 $("retryBtn").addEventListener("click",()=>loadModel().catch(()=>{}));
 $("sendBtn").addEventListener("click",()=>sendMessage(input.value));
 input.addEventListener("input",()=>{resizeInput();sendBtn.disabled=!input.value.trim()||generating});
