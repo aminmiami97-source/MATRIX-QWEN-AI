@@ -6,10 +6,11 @@ A browser-based AI chat interface powered by **Qwen2.5-0.5B-Instruct** and [WebL
 
 - Runs Qwen directly in the browser — no inference API key or MATRIX backend required.
 - Uses the instruction-tuned Qwen2.5 0.5B model in MLC 4-bit format.
-- Approximate model repository size: **290 MB** for the model package.
+- The first download includes model weights and runtime assets; the total size can vary with the selected model build and runtime version.
 - Uses WebGPU for local inference and hardware acceleration.
 - Full-screen model loading screen with live progress, error details, retry, and a ready state.
-- Browser caching so a later visit may reuse downloaded model files.
+- IndexedDB-backed browser caching so a later visit may reuse downloaded model files.
+- One automatic retry if model initialization fails during a temporary network interruption.
 - Responsive interface for desktop and mobile.
 - Chat history stored locally in the browser.
 
