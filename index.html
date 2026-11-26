@@ -127,14 +127,32 @@ async function loadModel(){
   $("loadBtn").disabled=true;$("loadBtn").textContent="Loading…";setStatus("Loading model",false);
   modelPromise=(async()=>{
     try{
-      if(!("gpu" in navigator))throw new Error("WebGPU is not available in this browser. Please use a recent version of Chrome or Edge on a device with WebGPU enabled.");
+      if(!("gpu" in navigator))throw new Error("WebGPU is not available in this browser. Please use a recent Chrome or Edge browser on a device with WebGPU support.");
       const adapter=await navigator.gpu.requestAdapter();
       if(!adapter)throw new Error("No compatible WebGPU adapter was found. Try a different browser or device.");
       $("loaderHeading").textContent="Loading MATRIX QWEN";
       $("loaderCopy").textContent="Downloading the compact Qwen model and preparing it for local chat. Keep this tab open.";
       setLoadingProgress("Starting model download",0,"Model: Qwen2.5 0.5B Instruct · MLC 4-bit · approximately 290 MB.");
-      const {CreateMLCEngine}=await import("https://esm.run/@mlc-ai/web-llm");
-      engine=await CreateMLCEngine(MODEL_ID,{initProgressCallback:onModelProgress});
+      const {CreateMLCEngine,prebuiltAppConfig}=await import("https://esm.run/@mlc-ai/web-llm@0.2.89");
+      // IndexedDB avoids the Cache API path that produced Cache.add() network errors.
+      const appConfig={...prebuiltAppConfig,cacheBackend:"indexeddb"};
+      let lastError;
+      for(let attempt=1;attempt<=2;attempt++){
+        try{
+          if(attempt===2){
+            $("loaderHeading").textContent="Retrying model download";
+            $("loaderCopy").textContent="The first download was interrupted. MATRIX is retrying the model initialization once.";
+            setLoadingProgress("Retrying download",0,"A temporary network interruption may have caused the previous attempt to fail.");
+            await new Promise(resolve=>setTimeout(resolve,1200));
+          }
+          engine=await CreateMLCEngine(MODEL_ID,{initProgressCallback:onModelProgress,appConfig});
+          break;
+        }catch(loadError){
+          lastError=loadError;
+          engine=null;
+          if(attempt===2)throw lastError;
+        }
+      }
       setLoadingProgress("Model ready",100,"Qwen has loaded successfully. This browser may reuse the cached model on your next visit.");
       $("loaderHeading").textContent="MATRIX is ready";
       $("loaderCopy").textContent="Your Qwen model is loaded and ready to chat. Your conversations stay in this browser.";
@@ -148,7 +166,11 @@ async function loadModel(){
       engine=null;modelPromise=null;
       $("loaderHeading").textContent="Couldn't load the model";
       $("loaderCopy").textContent="MATRIX couldn't initialize Qwen on this device.";
-      $("loaderError").textContent=error&&error.message?error.message:"Unknown loading error. Check your internet connection and try again.";
+      const rawMessage=error&&error.message?error.message:"Unknown loading error.";
+      const networkHint=/network|fetch|cache\.add|timeout|load failed/i.test(rawMessage)
+        ?" The model download may have been interrupted or blocked by the network. Check your connection, disable download-blocking extensions for this site, and press Try again."
+        :" Check WebGPU support and available device memory, then press Try again.";
+      $("loaderError").textContent=rawMessage+networkHint;
       $("loaderError").style.display="block";
       $("retryBtn").hidden=false;
       setLoadingProgress("Loading failed",0,"Check WebGPU support and your connection, then retry.");
