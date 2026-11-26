@@ -6,8 +6,9 @@ A browser-based AI chat interface powered by **Qwen2.5-0.5B-Instruct** and [Tran
 
 - Runs Qwen directly in the browser — no inference API key or backend required.
 - Uses the ONNX model from [onnx-community/Qwen2.5-0.5B-Instruct](https://huggingface.co/onnx-community/Qwen2.5-0.5B-Instruct).
-- Attempts WebGPU first and falls back to WebAssembly (WASM) if WebGPU initialization fails.
-- Quantized model loading with q4 weights.
+- Uses the smaller `q4f16` ONNX variant on WebGPU (483 MB model file).
+- Falls back to the `q4` ONNX variant on WebAssembly (WASM) when WebGPU is unavailable or fails to initialize (786 MB model file).
+- Quantized inference to reduce the model download and memory footprint.
 - Browser-cached model files and locally stored chat history.
 - Responsive interface for desktop and mobile.
 
