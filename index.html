@@ -110,7 +110,7 @@ function onModelProgress(report){
   if(!report||typeof report!=="object")return;
   const text=typeof report.text==="string"?report.text:(typeof report.status==="string"?report.status:"Downloading model files…");
   const raw=typeof report.progress==="number"?report.progress:Number.NaN;
-  const percent=Number.isFinite(raw)?(raw<=1?raw*100:raw):null;
+  const percent=Number.isFinite(raw)&&raw>0?(raw<=1?raw*100:raw):null;
   setLoadingProgress(text,percent,text);
 }
 function setStatus(text,ready){$("statusText").textContent=text;$("statusDot").classList.toggle("ready",Boolean(ready))}
@@ -174,7 +174,7 @@ async function loadModel(){
       $("loaderError").textContent=rawMessage+networkHint;
       $("loaderError").style.display="block";
       $("retryBtn").hidden=false;
-      setLoadingProgress("Loading failed",null,"Check WebGPU support and your connection, then retry.");
+      setLoadingProgress("Loading failed",null,"Check WebGPU support and your connection, then retry.");$("percentLabel").textContent="Failed";$("progressTrack").classList.remove("indeterminate");$("progressBar").style.width="0%";
       $("loadBtn").textContent="Try loading again";$("loadBtn").disabled=false;
       setStatus("Load failed",false);
       throw error;
