@@ -18,6 +18,32 @@
 .conversation{display:none;flex-direction:column;gap:23px;padding-bottom:20px}.message{display:flex;gap:12px;align-items:flex-start}.avatar{width:30px;height:30px;flex-shrink:0;border-radius:10px;display:grid;place-items:center;font:700 11px "Space Grotesk"}.user .avatar{background:#29243a;color:#d7caff}.assistant .avatar{background:linear-gradient(145deg,#a58aff,#6945d1);color:white}.message-body{min-width:0;flex:1;padding-top:2px}.role{font-size:11px;color:#9b97a8;font-weight:700;margin-bottom:7px}.message-text{font-size:14px;line-height:1.75;color:#e7e4ed;white-space:pre-wrap;overflow-wrap:anywhere}.message-tools{margin-top:8px}.copy{border:1px solid transparent;background:transparent;color:#898598;padding:4px 7px;border-radius:6px;font-size:10px}.copy:hover{border-color:var(--line);color:white}
 .loader{display:none;width:min(600px,100%);margin:0 auto 14px;padding:13px 15px;border:1px solid var(--line);border-radius:12px;background:#111119}.loader-row{display:flex;justify-content:space-between;gap:10px;font-size:11px;color:#d0cbd9}.loader-sub{font-size:10px;color:#898597;margin-top:5px}.track{height:4px;background:#292633;border-radius:8px;margin-top:11px;overflow:hidden}.bar{height:100%;width:0;background:linear-gradient(90deg,#7351dd,#b19aff);transition:width .2s}
 .composer-wrap{position:sticky;bottom:0;background:linear-gradient(transparent,var(--bg) 18%);padding-top:18px}.composer{padding:12px 13px 9px;border:1px solid #363342;border-radius:15px;background:#12121a;box-shadow:0 12px 40px #0005}.composer:focus-within{border-color:#7659b9;box-shadow:0 0 0 3px #9572ff16}textarea{width:100%;min-height:48px;max-height:170px;resize:none;border:0;outline:0;background:transparent;color:var(--text);font-size:14px;line-height:1.6;padding:3px 4px}textarea::placeholder{color:#777386}.composer-bottom{display:flex;justify-content:space-between;align-items:center;padding:5px 2px 0}.hint{font-size:10px;color:#777386}.send{height:35px;width:39px;border:0;border-radius:9px;background:linear-gradient(145deg,#a58aff,#7655dc);color:white;display:grid;place-items:center}.send:disabled{opacity:.35;cursor:not-allowed}.footnote{text-align:center;color:#706d7d;font-size:10px;padding:10px 0 0}.mobile-menu{display:none;background:transparent;border:0;color:#ccc;padding:4px}.overlay{display:none}
+
+.loader-screen{display:none;position:fixed;inset:0;z-index:50;align-items:center;justify-content:center;padding:22px;background:rgba(7,7,12,.96);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px)}
+.loader-screen.visible{display:flex}
+.loader-card{width:min(520px,100%);padding:34px 30px 26px;border:1px solid #383246;border-radius:22px;background:linear-gradient(155deg,#181521,#0e0e15 72%);box-shadow:0 28px 100px #000b,0 0 70px #7859d51c;text-align:center}
+.loader-symbol{width:62px;height:62px;margin:0 auto 20px;border:1px solid #5d478d;border-radius:19px;background:linear-gradient(145deg,#302448,#171320);display:grid;place-items:center;box-shadow:0 10px 36px #9471ff24}
+.loader-symbol svg{width:29px;height:29px;color:#c8b7ff}
+.loader-kicker{font-size:10px;font-weight:700;letter-spacing:2.1px;color:#a994e7}
+.loader-heading{font:700 26px "Space Grotesk";letter-spacing:-.7px;margin:0 0 9px}
+.loader-copy{font-size:13px;line-height:1.7;color:#a7a2b3;margin:0 auto 23px;max-width:390px}
+.loader-model{display:flex;justify-content:space-between;gap:12px;align-items:center;text-align:left;border:1px solid #302c3b;border-radius:12px;background:#111019;padding:12px 14px;margin:0 0 17px}
+.loader-model strong{display:block;font-size:12px;color:#eeeaf8}
+.loader-model span{display:block;margin-top:4px;font-size:10px;color:#898496}
+.loader-size{font:700 13px "Space Grotesk";color:#d3c5ff;white-space:nowrap}
+.loader-track{height:7px;border-radius:20px;overflow:hidden;background:#2a2634}
+.loader-fill{height:100%;width:0%;border-radius:20px;background:linear-gradient(90deg,#7553df,#b79bff);box-shadow:0 0 18px #a385ff60;transition:width .25s ease}
+.loader-status-row{display:flex;justify-content:space-between;gap:10px;margin-top:10px;color:#c9c4d4;font-size:11px}
+.loader-status-row span:last-child{font-variant-numeric:tabular-nums;color:#b59cff}
+.loader-detail{min-height:32px;margin:9px 0 0;text-align:left;color:#898496;font-size:10px;line-height:1.55;overflow-wrap:anywhere}
+.loader-tip{margin:17px 0 0;color:#777283;font-size:10px;line-height:1.6}
+.loader-error{display:none;text-align:left;margin-top:13px;padding:12px;border:1px solid #6c3944;background:#25151c;border-radius:10px;color:#f0b7c0;font-size:11px;line-height:1.6}
+.loader-actions{display:flex;gap:9px;margin-top:16px}
+.loader-action{flex:1;border:1px solid #51416e;background:#211a32;color:#f0eaff;padding:11px 14px;border-radius:10px;font-size:12px;font-weight:700}
+.loader-action.primary{border-color:#7659bb;background:linear-gradient(145deg,#9a7aff,#6c4bd0);color:white}
+.loader-action:disabled{opacity:.55;cursor:wait}
+@media(max-width:520px){.loader-card{padding:27px 20px 22px;border-radius:18px}.loader-heading{font-size:23px}.loader-model{padding:11px}.loader-actions{flex-direction:column}}
+
 @media(max-width:740px){.sidebar{position:fixed;inset:0 auto 0 0;transform:translateX(-105%);transition:transform .2s;width:275px;box-shadow:20px 0 70px #0008}.sidebar.open{transform:translateX(0)}.overlay.show{display:block;position:fixed;inset:0;background:#0009;z-index:4}.mobile-menu{display:block}.topbar{padding:0 14px}.content{padding:25px 15px 15px}.suggestions{grid-template-columns:1fr}.status{display:none}}
 @media(max-width:420px){.topbar{height:60px}.model-meta{display:none}.load-btn{padding:8px 10px}.message-text{font-size:13px}}
 </style>
@@ -31,46 +57,136 @@
 </aside>
 <div class="overlay" id="overlay"></div>
 <main class="main">
-<header class="topbar"><div class="top-left"><button class="mobile-menu" id="menuBtn" aria-label="Open menu">☰</button><div><div class="model-name">Qwen2.5 · 0.5B Instruct</div><div class="model-meta">WebGPU Q4F16 · WASM Q4 fallback · No API key</div></div></div><div class="top-left"><div class="status"><span class="dot" id="statusDot"></span><span id="statusText">Model not loaded</span></div><button class="load-btn" id="loadBtn">Load model</button></div></header>
+<header class="topbar"><div class="top-left"><button class="mobile-menu" id="menuBtn" aria-label="Open menu">☰</button><div><div class="model-name">Qwen2.5 · 0.5B Instruct</div><div class="model-meta">WebGPU · 4-bit MLC · ~290 MB download</div></div></div><div class="top-left"><div class="status"><span class="dot" id="statusDot"></span><span id="statusText">Model not loaded</span></div><button class="load-btn" id="loadBtn">Load Qwen · 290 MB</button></div></header>
 <section class="content">
   <div class="welcome" id="welcome"><div class="hero"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m12 2.8 2.2 7 7 2.2-7 2.2-2.2 7-2.2-7L2.8 12l7-2.2z"/><path d="m19 2 .7 2.3L22 5l-2.3.7L19 8l-.7-2.3L16 5l2.3-.7z"/></svg></div><h1>Meet <span class="gradient">MATRIX QWEN</span></h1><p class="welcome-copy">A lightweight AI assistant powered by Qwen, running directly in your browser. Load the model, then start chatting.</p>
     <div class="suggestions"><button class="suggestion" data-prompt="Explain how artificial intelligence works in simple terms."><strong>Learn something</strong>Explain how AI works in simple terms</button><button class="suggestion" data-prompt="Help me plan a small website project from start to finish."><strong>Plan a project</strong>Break a project into clear steps</button><button class="suggestion" data-prompt="Write a simple JavaScript function and explain how it works."><strong>Write some code</strong>Create and explain a JavaScript function</button><button class="suggestion" data-prompt="Give me five creative ideas for a browser game."><strong>Get creative</strong>Think of ideas for a browser game</button></div>
   </div>
-  <div class="loader" id="loader"><div class="loader-row"><span id="loaderTitle">Preparing Qwen model…</span><span id="progressLabel">Starting</span></div><div class="loader-sub" id="loaderSub">The first download can take a while. Keep this tab open.</div><div class="track"><div class="bar" id="progressBar"></div></div></div>
   <div class="conversation" id="conversation"></div>
   <div class="composer-wrap"><div class="composer"><textarea id="promptInput" rows="1" placeholder="Message MATRIX QWEN…" aria-label="Message MATRIX QWEN"></textarea><div class="composer-bottom"><span class="hint">Enter to send · Shift + Enter for a new line</span><button class="send" id="sendBtn" aria-label="Send message" disabled><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m5 12 14-7-5 14-3-6zM11 13l8-8"/></svg></button></div></div><div class="footnote">AI can make mistakes. Check important information.</div></div>
 </section>
 </main>
 </div>
+
+<div class="loader-screen" id="loaderScreen" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="loaderHeading">
+  <div class="loader-card">
+    <div class="loader-symbol"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 7.5 12 3l8 4.5v9L12 21l-8-4.5z"/><path d="m4.5 7.8 7.5 4.3 7.5-4.3M12 12v9"/></svg></div>
+    <div class="loader-kicker">MATRIX LOCAL AI</div>
+    <h2 class="loader-heading" id="loaderHeading">Preparing Qwen</h2>
+    <p class="loader-copy" id="loaderCopy">Your AI model runs directly in this browser. The first load downloads the model; later visits can reuse the browser cache.</p>
+    <div class="loader-model"><div><strong>Qwen2.5 · 0.5B Instruct</strong><span>4-bit MLC · WebGPU acceleration</span></div><div class="loader-size">~290 MB</div></div>
+    <div class="loader-track"><div class="loader-fill" id="progressBar"></div></div>
+    <div class="loader-status-row"><span id="progressLabel">Waiting to start</span><span id="percentLabel">0%</span></div>
+    <p class="loader-detail" id="loaderDetail">Keep this tab open while the model downloads and initializes.</p>
+    <div class="loader-error" id="loaderError"></div>
+    <div class="loader-actions"><button class="loader-action primary" id="continueBtn" hidden>Continue to chat</button><button class="loader-action primary" id="retryBtn" hidden>Try again</button></div>
+    <p class="loader-tip">Runs on your device · No API key · WebGPU required · Model files are hosted by Hugging Face</p>
+  </div>
+</div>
+
+
 <script type="module">
-import { pipeline, TextStreamer, env } from "https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.7.2";
-const MODEL_ID="onnx-community/Qwen2.5-0.5B-Instruct";
-const STORE_KEY="matrix-qwen-ai-chats-v1";
-const SYSTEM_PROMPT="You are MATRIX QWEN, a helpful, clear, friendly AI assistant. Give accurate and useful answers. Be honest about uncertainty. Use concise explanations by default, and provide readable code blocks when useful.";
-env.useBrowserCache=true;
-env.allowLocalModels=false;
-const $=id=>document.getElementById(id);
-const sidebar=$("sidebar"),overlay=$("overlay"),input=$("promptInput"),sendBtn=$("sendBtn"),conversation=$("conversation");
-let generator=null,modelPromise=null,generating=false;
+const MODEL_ID = "Qwen2.5-0.5B-Instruct-q4f16_1-MLC";
+const STORE_KEY = "matrix-qwen-ai-chats-v1";
+const SYSTEM_PROMPT = "You are MATRIX QWEN, a helpful, clear, friendly AI assistant. Give accurate and useful answers. Be honest about uncertainty. Use concise explanations by default, and provide readable code blocks when useful.";
+const $ = id => document.getElementById(id);
+const sidebar = $("sidebar"), overlay = $("overlay"), input = $("promptInput");
+const sendBtn = $("sendBtn"), conversation = $("conversation");
+let engine = null, modelPromise = null, generating = false;
+
 function makeId(){return Date.now().toString(36)+Math.random().toString(36).slice(2,7)}
 function readChats(){try{const value=JSON.parse(localStorage.getItem(STORE_KEY)||"[]");return Array.isArray(value)?value:[]}catch{return []}}
-let chats=readChats();
-let activeId=chats[0]?.id||makeId();
+let chats = readChats();
+let activeId = chats[0]?.id || makeId();
 function saveChats(){try{localStorage.setItem(STORE_KEY,JSON.stringify(chats))}catch(error){console.warn("Chat history could not be saved",error)}}
 function activeChat(){return chats.find(chat=>chat.id===activeId)}
 function createChat(){const chat={id:makeId(),title:"New chat",updated:Date.now(),messages:[]};chats.unshift(chat);activeId=chat.id;saveChats();renderAll();closeSidebar()}
 function closeSidebar(){sidebar.classList.remove("open");overlay.classList.remove("show")}
+function showLoadingScreen(){const screen=$("loaderScreen");screen.classList.add("visible");screen.setAttribute("aria-hidden","false");$("loaderError").style.display="none";$("continueBtn").hidden=true;$("retryBtn").hidden=true}
+function hideLoadingScreen(){const screen=$("loaderScreen");screen.classList.remove("visible");screen.setAttribute("aria-hidden","true")}
+function setLoadingProgress(label,percent,detail){$("progressLabel").textContent=label||"Preparing model…";if(Number.isFinite(percent)){const value=Math.max(0,Math.min(100,percent));$("progressBar").style.width=value+"%";$("percentLabel").textContent=Math.round(value)+"%"}if(detail)$("loaderDetail").textContent=detail}
+function onModelProgress(report){
+  if(!report||typeof report!=="object")return;
+  const text=typeof report.text==="string"?report.text:"Loading model files…";
+  const raw=Number(report.progress);
+  const percent=Number.isFinite(raw)?(raw<=1?raw*100:raw):null;
+  setLoadingProgress(text,percent,text);
+}
+function setStatus(text,ready){$("statusText").textContent=text;$("statusDot").classList.toggle("ready",Boolean(ready))}
 function renderList(){const list=$("chatList");list.replaceChildren();chats.forEach(chat=>{const button=document.createElement("button");button.className="chat-item"+(chat.id===activeId?" active":"");button.textContent=chat.title||"New chat";button.title=button.textContent;button.addEventListener("click",()=>{activeId=chat.id;renderAll();closeSidebar()});list.append(button)})}
 function addMessage(role,content){const wrap=document.createElement("article");wrap.className="message "+role;const avatar=document.createElement("div");avatar.className="avatar";avatar.textContent=role==="user"?"YOU":"M";const body=document.createElement("div");body.className="message-body";const label=document.createElement("div");label.className="role";label.textContent=role==="user"?"You":"MATRIX QWEN";const text=document.createElement("div");text.className="message-text";text.textContent=content;body.append(label,text);if(role==="assistant"){const tools=document.createElement("div");tools.className="message-tools";const copy=document.createElement("button");copy.className="copy";copy.textContent="Copy";copy.addEventListener("click",async()=>{try{await navigator.clipboard.writeText(text.textContent);copy.textContent="Copied";setTimeout(()=>copy.textContent="Copy",1200)}catch{copy.textContent="Unavailable"}});tools.append(copy);body.append(tools)}wrap.append(avatar,body);conversation.append(wrap);return text}
 function renderMessages(){conversation.replaceChildren();const chat=activeChat();const hasMessages=Boolean(chat&&chat.messages.length);$("welcome").style.display=hasMessages?"none":"flex";conversation.style.display=hasMessages?"flex":"none";if(chat)chat.messages.forEach(message=>addMessage(message.role,message.content))}
 function renderAll(){renderList();renderMessages()}
-function setStatus(text,ready){$("statusText").textContent=text;$("statusDot").classList.toggle("ready",Boolean(ready))}
-function progress(info){if(!info||typeof info!=="object")return;if(typeof info.progress==="number"){const amount=Math.max(0,Math.min(100,info.progress));$("progressBar").style.width=amount+"%";$("progressLabel").textContent=Math.round(amount)+"%"}else if(info.status){$("loaderTitle").textContent=info.status==="progress"?"Downloading model files…":"Preparing Qwen model…";$("progressLabel").textContent=info.status}if(info.file)$("loaderSub").textContent="Loading "+String(info.file).split("/").pop()}
-async function loadModel(){if(generator)return generator;if(modelPromise)return modelPromise;$("loadBtn").disabled=true;$("loadBtn").textContent="Loading…";$("loader").style.display="block";setStatus("Loading model",false);modelPromise=(async()=>{try{if("gpu" in navigator){try{setStatus("Loading WebGPU Q4F16",false);generator=await pipeline("text-generation",MODEL_ID,{dtype:"q4f16",device:"webgpu",progress_callback:progress})}catch(webgpuError){console.warn("WebGPU Q4F16 initialization failed; trying WASM Q4.",webgpuError);$("loaderSub").textContent="WebGPU Q4F16 is unavailable. Switching to the Q4 compatibility model…";setStatus("Loading WASM Q4",false);generator=await pipeline("text-generation",MODEL_ID,{dtype:"q4",device:"wasm",progress_callback:progress})}}else{setStatus("Loading WASM Q4",false);$("loaderSub").textContent="WebGPU is not available. Loading the Q4 compatibility model…";generator=await pipeline("text-generation",MODEL_ID,{dtype:"q4",device:"wasm",progress_callback:progress})}$("loaderTitle").textContent="Qwen is ready";$("loaderSub").textContent="The model is loaded in this browser."; $("progressBar").style.width="100%";$("progressLabel").textContent="Ready";$("loadBtn").textContent="Model ready";$("loadBtn").disabled=true;setStatus("Model ready",true);sendBtn.disabled=!input.value.trim();return generator}catch(error){console.error(error);generator=null;modelPromise=null;$("loaderTitle").textContent="Model could not be loaded";$("loaderSub").textContent="Check your connection, available memory, and browser compatibility, then try again.";$("progressLabel").textContent="Failed";$("progressBar").style.width="0%";$("loadBtn").textContent="Try again";$("loadBtn").disabled=false;setStatus("Load failed",false);throw error}})();return modelPromise}
-async function sendMessage(text){const clean=text.trim();if(!clean||generating)return;if(!generator){try{await loadModel()}catch{return}}let chat=activeChat();if(!chat){createChat();chat=activeChat()}chat.messages.push({role:"user",content:clean});if(chat.messages.length===1)chat.title=clean.length>34?clean.slice(0,34)+"…":clean;chat.updated=Date.now();saveChats();renderAll();input.value="";resizeInput();sendBtn.disabled=true;generating=true;const assistantNode=addMessage("assistant","");let streamed="";const messages=[{role:"system",content:SYSTEM_PROMPT},...chat.messages.slice(-12).map(message=>({role:message.role,content:message.content}))];try{const streamer=new TextStreamer(generator.tokenizer,{skip_prompt:true,callback_function:token=>{streamed+=token;assistantNode.textContent=streamed}});const result=await generator(messages,{max_new_tokens:280,do_sample:true,temperature:0.7,repetition_penalty:1.08,streamer});if(!streamed.trim()){const generated=result?.[0]?.generated_text;if(typeof generated==="string")streamed=generated;else if(Array.isArray(generated))streamed=generated.at(-1)?.content||"";assistantNode.textContent=streamed}if(!streamed.trim())streamed="I couldn't produce a response. Please try again.";chat.messages.push({role:"assistant",content:streamed});chat.updated=Date.now();saveChats();renderList()}catch(error){console.error(error);const message="I ran into a generation error. Please try a shorter message or reload the model.";assistantNode.textContent=message;chat.messages.push({role:"assistant",content:message});saveChats()}finally{generating=false;sendBtn.disabled=!input.value.trim()}}
+async function loadModel(){
+  if(engine)return engine;
+  if(modelPromise)return modelPromise;
+  showLoadingScreen();
+  $("loaderHeading").textContent="Preparing Qwen";
+  $("loaderCopy").textContent="Connecting to the browser AI engine and checking WebGPU support.";
+  setLoadingProgress("Preparing browser engine",0,"The first download is approximately 290 MB. Later visits may reuse the browser cache.");
+  $("loadBtn").disabled=true;$("loadBtn").textContent="Loading…";setStatus("Loading model",false);
+  modelPromise=(async()=>{
+    try{
+      if(!("gpu" in navigator))throw new Error("WebGPU is not available in this browser. Please use a recent version of Chrome or Edge on a device with WebGPU enabled.");
+      const adapter=await navigator.gpu.requestAdapter();
+      if(!adapter)throw new Error("No compatible WebGPU adapter was found. Try a different browser or device.");
+      $("loaderHeading").textContent="Loading MATRIX QWEN";
+      $("loaderCopy").textContent="Downloading the compact Qwen model and preparing it for local chat. Keep this tab open.";
+      setLoadingProgress("Starting model download",0,"Model: Qwen2.5 0.5B Instruct · MLC 4-bit · approximately 290 MB.");
+      const {CreateMLCEngine}=await import("https://esm.run/@mlc-ai/web-llm");
+      engine=await CreateMLCEngine(MODEL_ID,{initProgressCallback:onModelProgress});
+      setLoadingProgress("Model ready",100,"Qwen has loaded successfully. This browser may reuse the cached model on your next visit.");
+      $("loaderHeading").textContent="MATRIX is ready";
+      $("loaderCopy").textContent="Your Qwen model is loaded and ready to chat. Your conversations stay in this browser.";
+      $("continueBtn").hidden=false;
+      $("loadBtn").textContent="Model ready";$("loadBtn").disabled=true;
+      setStatus("Model ready",true);
+      sendBtn.disabled=!input.value.trim();
+      return engine;
+    }catch(error){
+      console.error("Model loading failed:",error);
+      engine=null;modelPromise=null;
+      $("loaderHeading").textContent="Couldn't load the model";
+      $("loaderCopy").textContent="MATRIX couldn't initialize Qwen on this device.";
+      $("loaderError").textContent=error&&error.message?error.message:"Unknown loading error. Check your internet connection and try again.";
+      $("loaderError").style.display="block";
+      $("retryBtn").hidden=false;
+      setLoadingProgress("Loading failed",0,"Check WebGPU support and your connection, then retry.");
+      $("loadBtn").textContent="Try loading again";$("loadBtn").disabled=false;
+      setStatus("Load failed",false);
+      throw error;
+    }
+  })();
+  return modelPromise;
+}
+async function sendMessage(text){
+  const clean=text.trim();if(!clean||generating)return;
+  if(!engine){try{await loadModel();hideLoadingScreen()}catch{return}}
+  let chat=activeChat();if(!chat){createChat();chat=activeChat()}
+  chat.messages.push({role:"user",content:clean});
+  if(chat.messages.length===1)chat.title=clean.length>34?clean.slice(0,34)+"…":clean;
+  chat.updated=Date.now();saveChats();renderAll();input.value="";resizeInput();sendBtn.disabled=true;
+  generating=true;const assistantNode=addMessage("assistant","");let streamed="";
+  const messages=[{role:"system",content:SYSTEM_PROMPT},...chat.messages.slice(-12).map(message=>({role:message.role,content:message.content}))];
+  try{
+    const stream=await engine.chat.completions.create({messages,temperature:0.7,top_p:0.9,max_tokens:280,stream:true});
+    for await(const chunk of stream){
+      const delta=chunk?.choices?.[0]?.delta?.content;
+      if(typeof delta==="string"&&delta){streamed+=delta;assistantNode.textContent=streamed}
+    }
+    if(!streamed.trim())streamed="I couldn't produce a response. Please try again.";
+    chat.messages.push({role:"assistant",content:streamed});chat.updated=Date.now();saveChats();renderList();
+  }catch(error){
+    console.error("Generation failed:",error);
+    const message="I ran into a generation error. Please try again with a shorter message.";
+    assistantNode.textContent=message;chat.messages.push({role:"assistant",content:message});saveChats();
+  }finally{generating=false;sendBtn.disabled=!input.value.trim()}
+}
 function resizeInput(){input.style.height="auto";input.style.height=Math.min(input.scrollHeight,170)+"px"}
 $("newChat").addEventListener("click",createChat);
 $("loadBtn").addEventListener("click",()=>loadModel().catch(()=>{}));
+$("continueBtn").addEventListener("click",hideLoadingScreen);
+$("retryBtn").addEventListener("click",()=>loadModel().catch(()=>{}));
 $("sendBtn").addEventListener("click",()=>sendMessage(input.value));
 input.addEventListener("input",()=>{resizeInput();sendBtn.disabled=!input.value.trim()||generating});
 input.addEventListener("keydown",event=>{if(event.key==="Enter"&&!event.shiftKey){event.preventDefault();sendMessage(input.value)}});
@@ -80,5 +196,6 @@ document.querySelectorAll("[data-prompt]").forEach(button=>button.addEventListen
 if(!chats.length){chats=[{id:activeId,title:"New chat",updated:Date.now(),messages:[]}];saveChats()}
 renderAll();
 </script>
+
 </body>
 </html>
