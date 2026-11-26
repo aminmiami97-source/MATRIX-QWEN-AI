@@ -8,7 +8,7 @@ A browser-based AI chat interface powered by **Qwen2.5-0.5B-Instruct** and [WebL
 - Uses the instruction-tuned Qwen2.5 0.5B model in MLC 4-bit format.
 - The first download includes model weights and runtime assets; the total size can vary with the selected model build and runtime version.
 - Uses WebGPU for local inference and hardware acceleration.
-- Full-screen model loading screen with live progress, error details, retry, and a ready state.
+- Full-screen model loading screen with progress feedback, error details, retry, a close (X) control, and a ready state.
 - IndexedDB-backed browser caching so a later visit may reuse downloaded model files.
 - One automatic retry if model initialization fails during a temporary network interruption.
 - Responsive interface for desktop and mobile.
